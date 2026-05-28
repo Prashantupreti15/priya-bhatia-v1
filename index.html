@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*,::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--plum:#8B1C5C;--plum2:#A52A70;--plum3:#C4588B;--blush:#FFF5F8;--blush2:#FEF0F4;--blush3:#fce8f1;--dark:#2D0B1E;--white:#FFFFFF;--muted:#8A6070;--border:rgba(139,28,92,0.14);--border2:rgba(139,28,92,0.3)}
 html{scroll-behavior:smooth}
 body{background:var(--white);color:var(--dark);font-family:"Plus Jakarta Sans",sans-serif;font-weight:300;overflow-x:hidden}
@@ -63,7 +63,7 @@ nav.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-sha
 .ticker-inner{display:inline-flex;animation:tick 22s linear infinite}
 .ticker-item{display:flex;align-items:center;gap:2rem;padding:0 2rem}
 .ticker-item span{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.9)}
-.ticker-item::after{content:"\2726";color:rgba(255,255,255,.3);font-size:.6rem}
+.ticker-item::after{content:"&#10022;";color:rgba(255,255,255,.3);font-size:.6rem}
 @keyframes tick{to{transform:translateX(-50%)}}
 section{padding:7rem 5vw}
 .sec-eyebrow{font-size:.67rem;letter-spacing:.25em;text-transform:uppercase;color:var(--plum);margin-bottom:.8rem}
@@ -263,8 +263,46 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
   .form-row{grid-template-columns:1fr}
   #chat-win{width:calc(100vw - 2rem);right:1rem}
 }
+
+/* PHOTO COLLAGE - see below */
 .hero-right{overflow:hidden;min-height:100vh;background:linear-gradient(135deg,var(--blush3) 0%,#f0b8d4 100%);position:relative}
 .photo-collage{position:relative;width:100%;height:100%;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.pc-card{position:absolute;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(139,28,92,.18);transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s;cursor:pointer}
+.pc-card:hover{box-shadow:0 16px 48px rgba(139,28,92,.28);z-index:10}
+.pc-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.pc-card:hover img{transform:scale(1.06)}
+.pc-label{position:absolute;bottom:0;left:0;right:0;padding:.6rem .9rem;background:linear-gradient(0deg,rgba(45,11,30,.85),transparent);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:0;transform:translateY(4px);transition:all .3s}
+.pc-card:hover .pc-label{opacity:1;transform:none}
+.pc-card-1{width:220px;height:270px;top:12%;left:8%;transform:rotate(-4deg);animation:float1 6s ease-in-out infinite}
+.pc-card-2{width:190px;height:240px;top:8%;right:10%;transform:rotate(3deg);animation:float2 7s ease-in-out infinite}
+.pc-card-3{width:210px;height:260px;bottom:15%;left:12%;transform:rotate(2deg);animation:float3 6.5s ease-in-out infinite}
+.pc-card-4{width:185px;height:235px;bottom:12%;right:8%;transform:rotate(-3deg);animation:float4 7.5s ease-in-out infinite}
+.pc-card-1:hover{transform:rotate(0deg) scale(1.05)}
+.pc-card-2:hover{transform:rotate(0deg) scale(1.05)}
+.pc-card-3:hover{transform:rotate(0deg) scale(1.05)}
+.pc-card-4:hover{transform:rotate(0deg) scale(1.05)}
+@keyframes float1{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(-4deg) translateY(-12px)}}
+@keyframes float2{0%,100%{transform:rotate(3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-16px)}}
+@keyframes float3{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-10px)}}
+@keyframes float4{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-14px)}}
+.pc-badge{position:absolute;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid rgba(139,28,92,.15);border-radius:10px;padding:.65rem 1rem;text-align:center;box-shadow:0 4px 20px rgba(139,28,92,.1);animation:badgePop .6s cubic-bezier(.23,1,.32,1) both}
+.pc-badge-num{font-family:"Playfair Display",serif;font-size:1.6rem;font-weight:700;color:var(--plum);line-height:1}
+.pc-badge-lbl{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
+.pc-badge-1{top:38%;left:50%;transform:translateX(-50%);animation-delay:.3s}
+.pc-badge-2{top:22%;left:38%;animation-delay:.5s}
+.pc-badge-3{bottom:30%;right:30%;animation-delay:.7s}
+.pc-badge-4{bottom:22%;left:40%;animation-delay:.9s}
+@keyframes badgePop{from{opacity:0;transform:scale(.8) translateX(-50%)}to{opacity:1;transform:scale(1) translateX(-50%)}}
+@media(max-width:960px){
+  .hero-right{min-height:380px}
+  .pc-card-1{width:150px;height:185px;top:8%;left:4%}
+  .pc-card-2{width:135px;height:165px;top:5%;right:5%}
+  .pc-card-3{width:145px;height:180px;bottom:8%;left:6%}
+  .pc-card-4{width:130px;height:162px;bottom:6%;right:5%}
+  .pc-badge{display:none}
+}
+
+/* IMAGE SECTION between stats and testimonials */
 .life-moments{padding:0;overflow:hidden;display:grid;grid-template-columns:repeat(4,1fr);height:320px}
 .lm-item{position:relative;overflow:hidden;cursor:pointer}
 .lm-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .5s ease;filter:saturate(.8)}
@@ -273,12 +311,17 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
 .lm-item:hover::after{opacity:1}
 .lm-caption{position:absolute;bottom:1.2rem;left:1.2rem;right:1.2rem;color:#fff;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:0;transform:translateY(6px);transition:all .3s;z-index:1}
 .lm-item:hover .lm-caption{opacity:1;transform:none}
+
+/* Services section background strip */
 .services-img-strip{height:220px;overflow:hidden;position:relative;margin-bottom:4rem}
 .services-img-strip img{width:100%;height:100%;object-fit:cover;filter:saturate(.6) brightness(1.1)}
 .services-img-strip::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#fff 0%,transparent 30%,transparent 70%,#fff 100%),linear-gradient(0deg,#fff 0%,transparent 40%,transparent 60%,#fff 100%)}
+
+/* ── INTERACTIVE HERO ── */
 .hero-right{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--blush3) 0%,#f0b8d4 60%,var(--blush2) 100%)}
 #particle-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .orbit-system{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1}
+/* Central shield */
 .orbit-center{position:relative;width:120px;height:120px;display:flex;align-items:center;justify-content:center;z-index:5}
 .orbit-ring{position:absolute;border-radius:50%;border:1px solid rgba(139,28,92,0.18);animation:spinRing 12s linear infinite}
 .ring-1{width:200px;height:200px;border-style:dashed;animation-duration:15s}
@@ -288,6 +331,7 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
 .orbit-core{width:80px;height:80px;border-radius:50%;background:var(--plum);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(139,28,92,.12),0 0 0 16px rgba(139,28,92,.06),0 8px 32px rgba(139,28,92,.3);animation:corePulse 3s ease-in-out infinite;z-index:6;position:relative}
 .orbit-core svg{width:34px;height:34px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round}
 @keyframes corePulse{0%,100%{box-shadow:0 0 0 8px rgba(139,28,92,.12),0 0 0 16px rgba(139,28,92,.06),0 8px 32px rgba(139,28,92,.3)}50%{box-shadow:0 0 0 12px rgba(139,28,92,.16),0 0 0 24px rgba(139,28,92,.08),0 12px 40px rgba(139,28,92,.35)}}
+/* Orbiting service items */
 .orb-item{position:absolute;display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:pointer;transition:transform .3s ease;will-change:transform}
 .orb-item:hover{transform:scale(1.15) !important}
 .orb-icon{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.9);border:2px solid rgba(139,28,92,.2);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(139,28,92,.15);transition:all .3s;backdrop-filter:blur(8px)}
@@ -296,6 +340,7 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
 .orb-icon svg{width:20px;height:20px;stroke:var(--plum);fill:none;stroke-width:1.8;stroke-linecap:round;transition:stroke .3s}
 .orb-item span{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--plum);background:rgba(255,255,255,.85);padding:.2rem .5rem;border-radius:10px;white-space:nowrap;opacity:0;transform:translateY(4px);transition:all .3s;backdrop-filter:blur(4px)}
 .orb-item:hover span{opacity:1;transform:none}
+/* Position orbiting items */
 .orb-1{top:50%;left:50%;animation:orbit1 8s linear infinite}
 .orb-2{top:50%;left:50%;animation:orbit2 10s linear infinite}
 .orb-3{top:50%;left:50%;animation:orbit3 9s linear infinite}
@@ -308,6 +353,7 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
 @keyframes orbit4{0%{transform:translate(-50%,-50%) rotate(180deg) translateX(155px) rotate(-180deg)}100%{transform:translate(-50%,-50%) rotate(540deg) translateX(155px) rotate(-540deg)}}
 @keyframes orbit5{0%{transform:translate(-50%,-50%) rotate(240deg) translateX(155px) rotate(-240deg)}100%{transform:translate(-50%,-50%) rotate(600deg) translateX(155px) rotate(-600deg)}}
 @keyframes orbit6{0%{transform:translate(-50%,-50%) rotate(300deg) translateX(155px) rotate(-300deg)}100%{transform:translate(-50%,-50%) rotate(660deg) translateX(155px) rotate(-660deg)}}
+/* Floating stat cards */
 .float-stat{position:absolute;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid rgba(139,28,92,.14);border-radius:10px;padding:.65rem 1rem;text-align:center;box-shadow:0 4px 20px rgba(139,28,92,.1);z-index:4;transition:transform .3s ease;will-change:transform}
 .fs-num{font-family:"Playfair Display",serif;font-size:1.5rem;font-weight:700;color:var(--plum);line-height:1}
 .fs-lbl{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
@@ -319,6 +365,26 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
 @keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 @keyframes floatC{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes floatD{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+/* Life moments strip */
+.life-moments{padding:0;overflow:hidden;display:grid;grid-template-columns:repeat(4,1fr);height:280px}
+.lm-item{position:relative;overflow:hidden;cursor:pointer}
+.lm-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .4s ease;filter:saturate(.75)}
+.lm-item:hover img{transform:scale(1.08);filter:saturate(1.15)}
+.lm-item::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(139,28,92,.6) 0%,transparent 55%);opacity:0;transition:opacity .3s}
+.lm-item:hover::after{opacity:1}
+.lm-caption{position:absolute;bottom:1rem;left:1rem;right:1rem;color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:0;transform:translateY(6px);transition:all .3s;z-index:1}
+.lm-item:hover .lm-caption{opacity:1;transform:none}
+.services-img-strip{height:200px;overflow:hidden;position:relative;margin-bottom:4rem}
+.services-img-strip img{width:100%;height:100%;object-fit:cover;filter:saturate(.5) brightness(1.15)}
+.services-img-strip::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#fff 0%,transparent 30%,transparent 70%,#fff 100%),linear-gradient(0deg,#fff 0%,transparent 40%,transparent 60%,#fff 100%)}
+@media(max-width:960px){
+  .orbit-system{transform:scale(.65)}
+  .hero-right{min-height:380px}
+  .life-moments{height:180px;grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:650px){.orbit-system{transform:scale(.5)}.life-moments{height:240px;grid-template-columns:1fr 1fr}}
+
+.data-counters{}
 .dc-card{background:var(--blush);border:1px solid var(--border);border-radius:8px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
 .dc-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(139,28,92,.12)}
 .dc-icon{width:36px;height:36px;border-radius:50%;background:rgba(139,28,92,.1);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
@@ -337,8 +403,175 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
 .donut-legend{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
 .dl-item{display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:var(--muted)}
 .dl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-@media(max-width:960px){.charts-grid{grid-template-columns:1fr}}
-@media(max-width:600px){}
+@media(max-width:960px){.charts-grid{grid-template-columns:1fr}.data-counters{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.data-counters{grid-template-columns:1fr 1fr}}
+
+/* ── CALCULATOR ── */
+.calc-wrap{background:var(--blush);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(139,28,92,.08)}
+.calc-steps{display:flex;align-items:center;padding:1.5rem 2rem;background:#fff;border-bottom:1px solid var(--border);gap:0}
+.calc-step{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.cs-num{width:28px;height:28px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;color:var(--muted);transition:all .3s}
+.cs-lbl{font-size:.75rem;font-weight:500;color:var(--muted);transition:color .3s;white-space:nowrap}
+.calc-step.active .cs-num{background:var(--plum);border-color:var(--plum);color:#fff}
+.calc-step.active .cs-lbl{color:var(--plum)}
+.calc-step.done .cs-num{background:rgba(139,28,92,.12);border-color:var(--plum);color:var(--plum)}
+.calc-step-line{flex:1;height:1px;background:var(--border);margin:0 .8rem}
+.calc-body{padding:2.5rem}
+.calc-panel{display:none}
+.calc-panel.active{display:block}
+.calc-panel-title{font-family:"Playfair Display",serif;font-size:1.3rem;color:var(--dark);margin-bottom:2rem}
+.calc-fields{display:flex;flex-direction:column;gap:2rem}
+.calc-field label{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;font-weight:500}
+/* Age slider */
+.age-slider-wrap{display:flex;align-items:center;gap:1.5rem}
+.calc-slider{flex:1;-webkit-appearance:none;height:4px;background:linear-gradient(90deg,var(--plum) 0%,var(--plum) 50%,rgba(139,28,92,.2) 50%,rgba(139,28,92,.2) 100%);border-radius:2px;outline:none;cursor:pointer}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--plum);border:3px solid #fff;box-shadow:0 2px 8px rgba(139,28,92,.3);cursor:pointer;transition:transform .2s}
+.calc-slider::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.age-display{font-family:"Playfair Display",serif;font-size:2rem;color:var(--plum);font-weight:700;min-width:80px;text-align:center;background:#fff;border:1px solid var(--border);border-radius:8px;padding:.4rem .8rem}
+.age-labels{display:flex;justify-content:space-between;font-size:.68rem;color:var(--muted);margin-top:.4rem;padding:0 10px}
+/* Radio options */
+.radio-group{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.radio-opt{display:flex;align-items:center;gap:.8rem;padding:1rem;background:#fff;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s}
+.radio-opt:hover{border-color:var(--border2)}
+.radio-opt.selected{border-color:var(--plum);background:rgba(139,28,92,.04)}
+.radio-icon{font-size:1.4rem;line-height:1}
+.rt-title{font-size:.85rem;font-weight:600;color:var(--dark)}
+.rt-sub{font-size:.7rem;color:var(--muted)}
+/* Counter */
+.counter-wrap{display:flex;align-items:center;gap:1rem}
+.cnt-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border2);background:#fff;color:var(--plum);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-weight:600;line-height:1}
+.cnt-btn:hover{background:var(--plum);color:#fff;border-color:var(--plum)}
+.cnt-val{font-family:"Playfair Display",serif;font-size:2rem;color:var(--plum);font-weight:700;min-width:50px;text-align:center}
+.cnt-hint{font-size:.78rem;color:var(--muted)}
+/* Coverage options */
+.coverage-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.cov-opt{padding:1.2rem;background:#fff;border:1.5px solid var(--border);border-radius:8px;text-align:center;cursor:pointer;transition:all .2s}
+.cov-opt:hover{border-color:var(--border2);transform:translateY(-2px)}
+.cov-opt.selected{border-color:var(--plum);background:rgba(139,28,92,.04)}
+.cov-amount{font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:700;color:var(--plum)}
+.cov-note{font-size:.7rem;color:var(--muted);margin-top:.3rem}
+/* Duration */
+.duration-opts{display:flex;gap:.8rem;flex-wrap:wrap}
+.dur-opt{padding:.6rem 1.4rem;background:#fff;border:1.5px solid var(--border);border-radius:20px;font-size:.82rem;cursor:pointer;transition:all .2s;color:var(--dark);font-weight:500}
+.dur-opt:hover{border-color:var(--border2)}
+.dur-opt.selected{background:var(--plum);color:#fff;border-color:var(--plum)}
+/* Deductible */
+.deductible-opts{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.ded-opt{padding:1rem;background:#fff;border:1.5px solid var(--border);border-radius:8px;text-align:center;cursor:pointer;transition:all .2s;font-size:.88rem;font-weight:600;color:var(--dark)}
+.ded-opt span{display:block;font-size:.68rem;font-weight:400;color:var(--muted);margin-top:.25rem}
+.ded-opt:hover{border-color:var(--border2)}
+.ded-opt.selected{border-color:var(--plum);background:rgba(139,28,92,.04);color:var(--plum)}
+/* Buttons */
+.calc-next-btn{background:var(--plum);color:#fff;border:none;padding:.85rem 2rem;font-family:"Plus Jakarta Sans",sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.08em;border-radius:6px;cursor:pointer;transition:all .22s}
+.calc-next-btn:hover{background:var(--plum2);transform:translateY(-1px)}
+.calc-back-btn{background:transparent;border:1.5px solid var(--border2);color:var(--plum);padding:.82rem 1.5rem;font-family:"Plus Jakarta Sans",sans-serif;font-size:.82rem;border-radius:6px;cursor:pointer;transition:all .2s}
+.calc-back-btn:hover{background:rgba(139,28,92,.06)}
+/* Result */
+.result-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+.result-tag{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--plum);margin-bottom:1rem;font-weight:600}
+.result-price-wrap{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.4rem}
+.result-from{font-size:.85rem;color:var(--muted)}
+.result-price{font-family:"Playfair Display",serif;font-size:4rem;font-weight:700;color:var(--plum);line-height:1;animation:priceIn .5s cubic-bezier(.23,1,.32,1)}
+@keyframes priceIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.result-period{font-size:.9rem;color:var(--muted)}
+.result-annual{font-size:.82rem;color:var(--muted);margin-bottom:1.5rem}
+.result-annual span{color:var(--plum);font-weight:600}
+.result-note{font-size:.75rem;color:var(--muted);line-height:1.6;background:#fff;border:1px solid var(--border);border-radius:6px;padding:.8rem 1rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:.5rem}
+.result-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.result-summary-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;font-weight:600}
+.result-rows{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem}
+.result-row{display:flex;justify-content:space-between;font-size:.82rem;padding:.5rem .8rem;background:#fff;border-radius:6px;border:1px solid var(--border)}
+.result-row-label{color:var(--muted)}
+.result-row-val{font-weight:600;color:var(--dark)}
+.result-breakdown{border-top:1px solid var(--border);padding-top:1rem;margin-bottom:1rem}
+.rb-title{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem}
+.rb-row{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);padding:.25rem 0}
+.rb-total{font-weight:700;color:var(--dark);font-size:.88rem;border-top:1px solid var(--border);padding-top:.5rem;margin-top:.3rem}
+.result-insurer-note{font-size:.7rem;color:var(--muted);display:flex;align-items:flex-start;gap:.4rem;line-height:1.5}
+.result-insurer-note svg{flex-shrink:0;margin-top:1px;stroke:var(--plum)}
+@media(max-width:760px){
+  .result-wrap{grid-template-columns:1fr}
+  .radio-group{grid-template-columns:1fr}
+  .coverage-opts{grid-template-columns:1fr}
+  .deductible-opts{grid-template-columns:1fr 1fr}
+  .calc-steps{flex-wrap:wrap;gap:.5rem}
+  .calc-step-line{display:none}
+}
+
+/* ── WHY REVIEWS ── */
+.why-reviews{margin-top:2.5rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem;box-shadow:0 2px 16px rgba(139,28,92,.06)}
+.wr-header{display:flex;gap:2rem;align-items:center;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.wr-score-block{text-align:center;flex-shrink:0}
+.wr-big-score{font-family:"Playfair Display",serif;font-size:3.5rem;font-weight:700;color:var(--dark);line-height:1}
+.wr-stars{color:#F5A623;font-size:1rem;letter-spacing:2px;margin:.3rem 0}
+.wr-count{font-size:.72rem;color:var(--muted);white-space:nowrap}
+.wr-bars{flex:1;display:flex;flex-direction:column;gap:.4rem}
+.wr-bar-row{display:flex;align-items:center;gap:.6rem;font-size:.72rem;color:var(--muted)}
+.wr-bar-row>span:first-child{width:24px;text-align:right;flex-shrink:0;color:#F5A623}
+.wr-bar-row>span:last-child{width:18px;flex-shrink:0}
+.wr-bar-track{flex:1;height:6px;background:rgba(139,28,92,.08);border-radius:3px;overflow:hidden}
+.wr-bar-fill{height:100%;background:var(--plum);border-radius:3px;width:0%;transition:width 1.2s cubic-bezier(.23,1,.32,1)}
+.wr-cards{display:flex;flex-direction:column;gap:1rem}
+.wr-card{background:var(--blush);border:1px solid var(--border);border-radius:8px;padding:1.1rem;transition:box-shadow .2s}
+.wr-card:hover{box-shadow:0 4px 16px rgba(139,28,92,.1)}
+.wr-card-top{display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem}
+.wr-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:var(--plum);flex-shrink:0;border:1px solid var(--border2)}
+.wr-name{font-size:.83rem;font-weight:600;color:var(--dark)}
+.wr-meta{font-size:.7rem;color:var(--muted);margin-top:.1rem}
+.wr-google{margin-left:auto;flex-shrink:0}
+.wr-stars-sm{color:#F5A623;font-size:.75rem;letter-spacing:1px;margin-bottom:.5rem}
+.wr-text{font-size:.82rem;color:rgba(45,11,30,.72);line-height:1.65;font-style:italic}
+.wr-hidden{display:none}
+.wr-more-btn{width:100%;margin-top:1rem;background:transparent;border:1.5px solid var(--border2);color:var(--plum);padding:.75rem;font-family:"Plus Jakarta Sans",sans-serif;font-size:.78rem;font-weight:600;border-radius:6px;cursor:pointer;transition:all .2s}
+.wr-more-btn:hover{background:var(--plum);color:#fff;border-color:var(--plum)}
+@media(max-width:500px){.wr-header{flex-direction:column;align-items:flex-start;gap:1rem}}
+
+
+
+
+
+
+
+/* ── SERVICE CARDS ── */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.svc-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:1.8rem;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--plum),var(--plum3));transform:scaleX(0);transform-origin:left;transition:transform .35s ease;border-radius:3px 3px 0 0}
+.svc-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(139,28,92,.1);border-color:rgba(139,28,92,.22)}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-card-featured{border-color:var(--plum);background:linear-gradient(160deg,#fff 75%,rgba(139,28,92,.03) 100%)}
+.svc-card-featured::before{transform:scaleX(1)}
+.svc-featured-badge{position:absolute;top:1rem;right:1rem;background:var(--plum);color:#fff;font-size:.63rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border-radius:12px}
+.svc-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.2rem}
+.svc-icon{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.svc-icon svg{width:21px;height:21px;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.svc-icon-1{background:rgba(139,28,92,.09)} .svc-icon-1 svg{stroke:#8B1C5C}
+.svc-icon-2{background:rgba(192,57,43,.09)} .svc-icon-2 svg{stroke:#C0392B}
+.svc-icon-3{background:rgba(26,82,118,.09)} .svc-icon-3 svg{stroke:#1A5276}
+.svc-icon-4{background:rgba(14,102,85,.09)} .svc-icon-4 svg{stroke:#0E6655}
+.svc-icon-5{background:rgba(108,52,131,.09)} .svc-icon-5 svg{stroke:#6C3483}
+.svc-icon-6{background:rgba(147,81,22,.09)} .svc-icon-6 svg{stroke:#935116}
+.svc-num{font-family:"Playfair Display",serif;font-size:2.2rem;font-weight:700;color:rgba(139,28,92,.08);line-height:1}
+.svc-title{font-family:"Playfair Display",serif;font-size:1.12rem;font-weight:700;color:var(--dark);margin-bottom:.55rem}
+.svc-desc{font-size:.82rem;color:var(--muted);line-height:1.65;margin-bottom:1rem;flex:1}
+.svc-features{list-style:none;display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.3rem}
+.svc-features li{font-size:.77rem;color:rgba(45,11,30,.6);padding-left:1rem;position:relative;line-height:1.4}
+.svc-features li::before{content:'';position:absolute;left:0;top:.48em;width:5px;height:5px;border-radius:50%;background:var(--plum);opacity:.4}
+.svc-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:1rem;margin-top:auto}
+.svc-price{font-size:.78rem;color:var(--muted)}
+.svc-price strong{font-family:"Playfair Display",serif;font-size:1.2rem;color:var(--dark);font-weight:700}
+.svc-btn{background:var(--plum);color:#fff;padding:.48rem 1.1rem;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:all .2s;white-space:nowrap}
+.svc-btn:hover{background:var(--plum2);transform:translateY(-1px)}
+@media(max-width:960px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.svc-grid{grid-template-columns:1fr}}
+
+.footer-social-col{}
+.footer-socials{display:flex;flex-direction:column;gap:.55rem}
+.fsoc-btn{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.fsoc-btn:hover{color:#fff}
+.fsoc-btn svg{width:15px;height:15px;flex-shrink:0}
+.inv-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.inv-tag{background:rgba(22,160,133,.08);border:1px solid rgba(22,160,133,.2);color:#0E6655;padding:.35rem .75rem;border-radius:8px;font-size:.75rem;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:.1rem;min-width:58px;text-align:center}
+.inv-sub{font-size:.62rem;font-weight:400;color:var(--muted);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -350,7 +583,7 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
     <li><a href="#services">Coverage</a></li>
     <li><a href="#why">Why Priya</a></li>
     <li><a href="#testimonials">Reviews</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#calculator">Calculator</a></li><li><a href="#faq">FAQ</a></li>
   </ul>
   <a href="#quote" class="nav-btn">Free Quote</a>
   <button class="hamburger" onclick="document.getElementById('mob').classList.toggle('open')"><span></span><span></span><span></span></button>
@@ -367,7 +600,7 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
     <div class="hero-pill"><span class="hero-pill-dot"></span><span>Licensed Insurance Broker &middot; Ontario</span></div>
     <h1 class="hero-h1">Your Family<br>Deserves<br><em>Real Protection.</em></h1>
     <div class="typing-wrap"><div class="typing-label">Specializing in</div><span class="typing-text" id="typ-el"></span></div>
-    <p class="hero-sub">Trusted by 500+ families across Ontario. Independent broker with access to Canada's top insurers &mdash; honest advice in English &amp; Hindi.</p>
+    <p class="hero-sub">Whether it's life, critical illness, disability, or visitor/travel insurance, I'll explain your options simply and help you choose the right coverage. Serving Ontario &amp; Alberta.</p>
     <div class="hero-actions">
       <a href="#quote" class="btn-plum">Get My Free Quote</a>
       <a href="tel:6479323000" class="btn-outline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.13 19.79 19.79 0 0 1 1.62 4.5 2 2 0 0 1 3.62 2.5h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.72-.72a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>647-932-3000</a>
@@ -381,6 +614,7 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
   <div class="hero-right" id="hero-right">
     <canvas id="particle-canvas"></canvas>
     <div class="orbit-system" id="orbit">
+      <!-- Central element -->
       <div class="orbit-center">
         <div class="orbit-ring ring-1"></div>
         <div class="orbit-ring ring-2"></div>
@@ -389,12 +623,14 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
       </div>
+      <!-- Orbiting service icons -->
       <div class="orb-item orb-1" data-depth="0.3"><div class="orb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><span>Life</span></div>
       <div class="orb-item orb-2" data-depth="0.5"><div class="orb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span>Critical</span></div>
       <div class="orb-item orb-3" data-depth="0.2"><div class="orb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span>Mortgage</span></div>
       <div class="orb-item orb-4" data-depth="0.4"><div class="orb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><span>Super Visa</span></div>
       <div class="orb-item orb-5" data-depth="0.6"><div class="orb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span>Disability</span></div>
       <div class="orb-item orb-6" data-depth="0.35"><div class="orb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div><span>Health</span></div>
+      <!-- Floating stat cards -->
       <div class="float-stat fs-1" data-depth="0.7"><div class="fs-num">500+</div><div class="fs-lbl">Families</div></div>
       <div class="float-stat fs-2" data-depth="0.4"><div class="fs-num">10+</div><div class="fs-lbl">Years</div></div>
       <div class="float-stat fs-3" data-depth="0.55"><div class="fs-num">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="fs-lbl">Rated</div></div>
@@ -407,16 +643,95 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
 <div class="services-img-strip"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80&auto=format&fit=crop" alt="Insurance advice"/></div>
   <div class="services-top">
     <div><div class="sec-eyebrow reveal">What We Cover</div><h2 class="sec-title reveal">Six ways to protect<br><em>everything you've built</em></h2></div>
-    <p class="sec-sub reveal">Hover each card to learn more. Every plan is customized for your family.</p>
+    <p class="sec-sub reveal">Hover each card to explore. Every plan is customized for your family.</p>
   </div>
-  <div class="flip-grid">
-    <div class="flip-card reveal"><div class="flip-inner"><div class="flip-face"><div class="flip-num">01</div><div class="flip-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="flip-name">Life Insurance</div><div class="flip-sub">Term &middot; Whole &middot; Universal. Protect your family's future.</div></div><div class="flip-back"><div class="flip-back-title">Life Insurance</div><div class="flip-back-text">Tax-free death benefit for your loved ones. Starts from ~$20/month. Priya shops 20+ insurers for the best rate.</div><a href="#quote" class="flip-back-cta">Get a Quote <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></div>
-    <div class="flip-card reveal"><div class="flip-inner"><div class="flip-face"><div class="flip-num">02</div><div class="flip-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="flip-name">Critical Illness</div><div class="flip-sub">Lump-sum payout on diagnosis. Focus on recovery, not bills.</div></div><div class="flip-back"><div class="flip-back-title">Critical Illness</div><div class="flip-back-text">Covers 25+ conditions including cancer, heart attack &amp; stroke. Tax-free lump sum you use however you need.</div><a href="#quote" class="flip-back-cta">Get a Quote <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></div>
-    <div class="flip-card reveal"><div class="flip-inner"><div class="flip-face"><div class="flip-num">03</div><div class="flip-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="flip-name">Disability</div><div class="flip-sub">Replace lost income when illness or injury prevents you working.</div></div><div class="flip-back"><div class="flip-back-title">Disability Insurance</div><div class="flip-back-text">Short and long-term options. Your income is your most valuable asset &mdash; protect it.</div><a href="#quote" class="flip-back-cta">Get a Quote <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></div>
-    <div class="flip-card reveal"><div class="flip-inner"><div class="flip-face"><div class="flip-num">04</div><div class="flip-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="flip-name">Super Visa &amp; Travel</div><div class="flip-sub">IRCC-compliant coverage for visiting parents &amp; grandparents.</div></div><div class="flip-back"><div class="flip-back-title">Super Visa &amp; Travel</div><div class="flip-back-text">$100K+ medical coverage. Same-day approval. Monthly payments. Fully IRCC-compliant.</div><a href="#quote" class="flip-back-cta">Get a Quote <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></div>
-    <div class="flip-card reveal"><div class="flip-inner"><div class="flip-face"><div class="flip-num">05</div><div class="flip-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="flip-name">Health &amp; Dental</div><div class="flip-sub">Fill OHIP gaps &mdash; prescriptions, vision, dental &amp; more.</div></div><div class="flip-back"><div class="flip-back-title">Health &amp; Dental</div><div class="flip-back-text">Individual, family and group plans. Covers drugs, dental, vision and paramedical services.</div><a href="#quote" class="flip-back-cta">Get a Quote <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></div>
-    <div class="flip-card reveal"><div class="flip-inner"><div class="flip-face"><div class="flip-num">06</div><div class="flip-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><div class="flip-name">Mortgage Protection</div><div class="flip-sub">Keep your home safe. Portable coverage better than the bank.</div></div><div class="flip-back"><div class="flip-back-title">Mortgage Protection</div><div class="flip-back-text">Personally owned, portable, and usually cheaper than bank creditor insurance.</div><a href="#quote" class="flip-back-cta">Get a Quote <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></div></div>
+  <div class="svc-grid">
+
+  <div class="svc-card">
+    <div class="svc-card-top">
+      <div class="svc-icon svc-icon-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <span class="svc-num">01</span>
+    </div>
+    <h3 class="svc-title">Life Insurance</h3>
+    <p class="svc-desc">Protect your family financially if the unexpected happens. Choose the plan that fits your life stage.</p>
+    <ul class="svc-features"><li>Term &middot; Whole &middot; Universal options</li><li>Tax-free death benefit</li><li>From ~$20/month</li></ul>
+    <div class="svc-footer"><span class="svc-price">From <strong>$20</strong>/mo</span><a href="#quote" class="svc-btn">Get Quote</a></div>
   </div>
+
+  <div class="svc-card">
+    <div class="svc-card-top">
+      <div class="svc-icon svc-icon-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <span class="svc-num">02</span>
+    </div>
+    <h3 class="svc-title">Critical Illness</h3>
+    <p class="svc-desc">A lump-sum tax-free payout when you need it most &mdash; on diagnosis of a covered condition.</p>
+    <ul class="svc-features"><li>25+ covered conditions</li><li>Cancer, heart attack, stroke &amp; more</li><li>Use the money however you need</li></ul>
+    <div class="svc-footer"><span class="svc-price">From <strong>$30</strong>/mo</span><a href="#quote" class="svc-btn">Get Quote</a></div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-card-top">
+      <div class="svc-icon svc-icon-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <span class="svc-num">03</span>
+    </div>
+    <h3 class="svc-title">Disability</h3>
+    <p class="svc-desc">If illness or injury stops you from working, your income keeps flowing so your family stays secure.</p>
+    <ul class="svc-features"><li>Short &amp; long-term options</li><li>Up to 85% income replacement</li><li>Ideal for self-employed</li></ul>
+    <div class="svc-footer"><span class="svc-price">From <strong>$40</strong>/mo</span><a href="#quote" class="svc-btn">Get Quote</a></div>
+  </div>
+
+  <div class="svc-card svc-card-featured">
+    <div class="svc-featured-badge">&#10022; Most Popular</div>
+    <div class="svc-card-top">
+      <div class="svc-icon svc-icon-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <span class="svc-num">04</span>
+    </div>
+    <h3 class="svc-title">Super Visa &amp; Travel</h3>
+    <p class="svc-desc">IRCC-approved medical insurance for parents &amp; grandparents visiting Canada. Fast, affordable, trusted.</p>
+    <ul class="svc-features"><li>Minimum $100,000 coverage (IRCC)</li><li>Same-day approval available</li><li>Monthly payment options</li></ul>
+    <div class="svc-footer"><span class="svc-price">From <strong>$100</strong>/mo</span><a href="#calculator" class="svc-btn">Instant Quote</a></div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-card-top">
+      <div class="svc-icon svc-icon-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <span class="svc-num">05</span>
+    </div>
+    <h3 class="svc-title">Health &amp; Dental</h3>
+    <p class="svc-desc">Bridge the gaps OHIP doesn&rsquo;t cover. From prescriptions to dental, paramedical and vision.</p>
+    <ul class="svc-features"><li>Drugs, dental, vision &amp; physio</li><li>Individual &amp; family plans</li><li>Great for self-employed</li></ul>
+    <div class="svc-footer"><span class="svc-price">From <strong>$80</strong>/mo</span><a href="#quote" class="svc-btn">Get Quote</a></div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-card-top">
+      <div class="svc-icon svc-icon-6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <span class="svc-num">06</span>
+    </div>
+    <h3 class="svc-title">Mortgage Protection</h3>
+    <p class="svc-desc">Keep your family in their home. Independent coverage that beats what the bank offers.</p>
+    <ul class="svc-features"><li>Portable &mdash; moves with you</li><li>Save ~38% vs bank insurance</li><li>Personally owned policy</li></ul>
+    <div class="svc-footer"><span class="svc-price">From <strong>$25</strong>/mo</span><a href="#quote" class="svc-btn">Get Quote</a></div>
+  </div>
+
+  <div class="svc-card" style="grid-column:span 3">
+    <div class="svc-card-top">
+      <div class="svc-icon" style="background:rgba(22,160,133,.09)"><svg viewBox="0 0 24 24" fill="none" stroke="#16A085" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <span class="svc-num">07</span>
+    </div>
+    <h3 class="svc-title">Investment Accounts</h3>
+    <p class="svc-desc">Simple tax-efficient accounts to help you save for education, retirement, or your first home. Priya explains all options in plain language.</p>
+    <div class="inv-tags">
+      <span class="inv-tag">FHSA <span class="inv-sub">First Home</span></span>
+      <span class="inv-tag">RRSP <span class="inv-sub">Retirement</span></span>
+      <span class="inv-tag">RESP <span class="inv-sub">Education</span></span>
+      <span class="inv-tag">RDSP <span class="inv-sub">Disability</span></span>
+      <span class="inv-tag">TFSA <span class="inv-sub">Tax-Free</span></span>
+    </div>
+    <div class="svc-footer" style="margin-top:1.2rem"><span class="svc-price" style="font-size:.82rem;color:var(--muted)">Free consultation &mdash; no obligation</span><a href="#quote" class="svc-btn" style="background:#16A085">Learn More</a></div>
+  </div>
+
+</div>
 </section>
 <section id="why">
   <div class="sec-eyebrow reveal">Why Choose Priya</div>
@@ -429,7 +744,9 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
       <a href="tel:6479323000" class="why-cta-btn"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.13 19.79 19.79 0 0 1 1.62 4.5 2 2 0 0 1 3.62 2.5h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.72-.72a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call 647-932-3000</a>
     </div>
     <div class="reveal-r">
-      <p style="font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:2rem">As an independent broker, Priya works for <em style="color:var(--plum);font-style:italic">you</em> &mdash; not for any insurance company. That means unbiased advice and rates banks simply can't match.</p>
+      <p style="font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:.9rem">Hi, I&rsquo;m Priya. When I moved to Canada twenty years ago, I felt exactly what many of my clients feel today &mdash; overwhelmed, uncertain, and unsure who to trust when planning for the future.</p>
+      <p style="font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:.9rem">That experience led me to become an insurance advisor. Today I&rsquo;ve helped <strong>100+ immigrant and Canadian families</strong> across Ontario protect what matters most &mdash; with compassion, clarity and genuine advice.</p>
+      <p style="font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:2rem">As a <strong>mother of 2 growing kids</strong> myself, I understand the growing needs of your family. As an independent broker, I work for <em style="color:var(--plum);font-style:italic">you</em> &mdash; not any insurance company.</p>
       <table class="compare-table">
         <thead><tr><th>Feature</th><th>&#10022; Priya Bhatia</th><th>Bank / Single Insurer</th></tr></thead>
         <tbody>
@@ -442,23 +759,312 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
           <tr><td>Free consultation</td><td class="check">&#10003; Always</td><td class="cross">&#10007; Sometimes</td></tr>
         </tbody>
       </table>
+
+      <!-- Google-style reviews -->
+      <div class="why-reviews">
+        <div class="wr-header">
+          <div class="wr-score-block">
+            <div class="wr-big-score">4.9</div>
+            <div class="wr-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="wr-count">Based on 87 reviews</div>
+          </div>
+          <div class="wr-bars">
+            <div class="wr-bar-row"><span>5&#9733;</span><div class="wr-bar-track"><div class="wr-bar-fill" style="width:91%"></div></div><span>79</span></div>
+            <div class="wr-bar-row"><span>4&#9733;</span><div class="wr-bar-track"><div class="wr-bar-fill" style="width:7%"></div></div><span>6</span></div>
+            <div class="wr-bar-row"><span>3&#9733;</span><div class="wr-bar-track"><div class="wr-bar-fill" style="width:2%"></div></div><span>2</span></div>
+            <div class="wr-bar-row"><span>2&#9733;</span><div class="wr-bar-track"><div class="wr-bar-fill" style="width:0%"></div></div><span>0</span></div>
+            <div class="wr-bar-row"><span>1&#9733;</span><div class="wr-bar-track"><div class="wr-bar-fill" style="width:0%"></div></div><span>0</span></div>
+          </div>
+        </div>
+
+        <div class="wr-cards" id="wr-cards">
+          <div class="wr-card">
+            <div class="wr-card-top">
+              <div class="wr-avatar" style="background:#e8d5f5">SM</div>
+              <div>
+                <div class="wr-name">Simran Malhotra</div>
+                <div class="wr-meta">Brampton &middot; 2 weeks ago</div>
+              </div>
+              <div class="wr-google"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+            </div>
+            <div class="wr-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="wr-text">"Priya helped me get Super Visa insurance for my parents the same day I called. She explained everything so clearly and the price was much better than what I found online. I will definitely use her again."</div>
+          </div>
+
+          <div class="wr-card">
+            <div class="wr-card-top">
+              <div class="wr-avatar" style="background:#d5e8f5">AK</div>
+              <div>
+                <div class="wr-name">Arjun Kapoor</div>
+                <div class="wr-meta">Mississauga &middot; 1 month ago</div>
+              </div>
+              <div class="wr-google"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+            </div>
+            <div class="wr-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="wr-text">"I was paying too much for mortgage insurance through my bank for years. Priya switched me to a much better policy and saved me almost $80 a month. Wish I had called her sooner!"</div>
+          </div>
+
+          <div class="wr-card">
+            <div class="wr-card-top">
+              <div class="wr-avatar" style="background:#f5e8d5">NS</div>
+              <div>
+                <div class="wr-name">Neha Sharma</div>
+                <div class="wr-meta">Toronto &middot; 3 months ago</div>
+              </div>
+              <div class="wr-google"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+            </div>
+            <div class="wr-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="wr-text">"As a newcomer to Canada, insurance felt very confusing. Priya explained everything in Hindi which made it so much easier. She got us life and health coverage at a great rate. Very professional and caring."</div>
+          </div>
+
+          <!-- Hidden reviews shown on "See more" -->
+          <div class="wr-card wr-hidden">
+            <div class="wr-card-top">
+              <div class="wr-avatar" style="background:#d5f5e8">RV</div>
+              <div>
+                <div class="wr-name">Rahul Verma</div>
+                <div class="wr-meta">Vaughan &middot; 4 months ago</div>
+              </div>
+              <div class="wr-google"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+            </div>
+            <div class="wr-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="wr-text">"Quick, honest, and no pressure at all. Priya took time to understand our family situation and recommended exactly what we needed. Critical illness coverage sorted in one call. Highly recommended."</div>
+          </div>
+
+          <div class="wr-card wr-hidden">
+            <div class="wr-card-top">
+              <div class="wr-avatar" style="background:#f5d5e8">PG</div>
+              <div>
+                <div class="wr-name">Preet Gill</div>
+                <div class="wr-meta">Oakville &middot; 5 months ago</div>
+              </div>
+              <div class="wr-google"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+            </div>
+            <div class="wr-stars-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="wr-text">"My parents needed visitor insurance urgently and Priya had everything arranged within a few hours. The process was completely stress-free. She really goes above and beyond for her clients."</div>
+          </div>
+        </div>
+
+        <button class="wr-more-btn" id="wr-more-btn" onclick="showMoreReviews()">
+          See all 87 reviews &#8594;
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS GRAPHS SECTION -->
+
+<!-- SUPER VISA CALCULATOR -->
+<section id="calculator" style="background:#fff;padding:7rem 5vw;position:relative;overflow:hidden">
+  <div style="position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(139,28,92,.05) 0%,transparent 70%);pointer-events:none"></div>
+  <div style="max-width:900px;margin:0 auto">
+    <div class="sec-eyebrow reveal">Free Tool</div>
+    <h2 class="sec-title reveal">Super Visa Insurance<br><em>Instant Quote Calculator</em></h2>
+    <p class="sec-sub reveal" style="margin-bottom:3rem">Get an estimated monthly premium in seconds. No email required — just honest numbers.</p>
+
+    <div class="calc-wrap reveal">
+      <!-- Step indicator -->
+      <div class="calc-steps">
+        <div class="calc-step active" id="step-ind-1"><div class="cs-num">1</div><div class="cs-lbl">Visitor Details</div></div>
+        <div class="calc-step-line"></div>
+        <div class="calc-step" id="step-ind-2"><div class="cs-num">2</div><div class="cs-lbl">Coverage Options</div></div>
+        <div class="calc-step-line"></div>
+        <div class="calc-step" id="step-ind-3"><div class="cs-num">3</div><div class="cs-lbl">Your Quote</div></div>
+      </div>
+
+      <div class="calc-body">
+        <!-- STEP 1 -->
+        <div class="calc-panel active" id="calc-step-1">
+          <h3 class="calc-panel-title">About the visitor</h3>
+          <div class="calc-fields">
+            <div class="calc-field">
+              <label>Visitor's Age</label>
+              <div class="age-slider-wrap">
+                <input type="range" id="visitor-age" min="40" max="85" value="60" step="1" class="calc-slider" oninput="updateAge(this.value)"/>
+                <div class="age-display"><span id="age-val">60</span> <span style="font-size:.8rem;color:var(--muted)">years old</span></div>
+              </div>
+              <div class="age-labels"><span>40</span><span>55</span><span>70</span><span>85</span></div>
+            </div>
+            <div class="calc-field">
+              <label>Medical History</label>
+              <div class="radio-group">
+                <label class="radio-opt selected" onclick="selectRadio(this,'health','excellent')">
+                  <input type="radio" name="health" value="excellent" checked hidden/>
+                  <div class="radio-icon">&#128154;</div>
+                  <div class="radio-text"><div class="rt-title">Excellent</div><div class="rt-sub">No major conditions</div></div>
+                </label>
+                <label class="radio-opt" onclick="selectRadio(this,'health','stable')">
+                  <input type="radio" name="health" value="stable" hidden/>
+                  <div class="radio-icon">&#128155;</div>
+                  <div class="radio-text"><div class="rt-title">Stable</div><div class="rt-sub">Managed conditions</div></div>
+                </label>
+                <label class="radio-opt" onclick="selectRadio(this,'health','complex')">
+                  <input type="radio" name="health" value="complex" hidden/>
+                  <div class="radio-icon">&#128159;</div>
+                  <div class="radio-text"><div class="rt-title">Complex</div><div class="rt-sub">Multiple conditions</div></div>
+                </label>
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Number of Visitors</label>
+              <div class="counter-wrap">
+                <button class="cnt-btn" onclick="changeCount(-1)">&#8722;</button>
+                <div class="cnt-val" id="visitor-count">1</div>
+                <button class="cnt-btn" onclick="changeCount(1)">&#43;</button>
+                <div class="cnt-hint">visitors to insure</div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right;margin-top:2rem">
+            <button class="calc-next-btn" onclick="goStep(2)">Next: Coverage Options <span>&#8594;</span></button>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="calc-panel" id="calc-step-2">
+          <h3 class="calc-panel-title">Choose your coverage</h3>
+          <div class="calc-fields">
+            <div class="calc-field">
+              <label>Coverage Amount</label>
+              <div class="coverage-opts">
+                <div class="cov-opt" onclick="selectCov(this,100000)">
+                  <div class="cov-amount">$100,000</div>
+                  <div class="cov-note">IRCC Minimum</div>
+                </div>
+                <div class="cov-opt selected" onclick="selectCov(this,150000)">
+                  <div class="cov-amount">$150,000</div>
+                  <div class="cov-note">Most Popular &#10022;</div>
+                </div>
+                <div class="cov-opt" onclick="selectCov(this,200000)">
+                  <div class="cov-amount">$200,000</div>
+                  <div class="cov-note">Maximum Protection</div>
+                </div>
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Duration of Stay</label>
+              <div class="duration-opts">
+                <div class="dur-opt" onclick="selectDur(this,3)">3 months</div>
+                <div class="dur-opt" onclick="selectDur(this,6)">6 months</div>
+                <div class="dur-opt selected" onclick="selectDur(this,12)">12 months</div>
+                <div class="dur-opt" onclick="selectDur(this,24)">24 months</div>
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Deductible (lowers your premium)</label>
+              <div class="deductible-opts">
+                <div class="ded-opt selected" onclick="selectDed(this,0,1.0)">$0 <span>No deductible</span></div>
+                <div class="ded-opt" onclick="selectDed(this,500,0.88)">$500 <span>Save ~12%</span></div>
+                <div class="ded-opt" onclick="selectDed(this,1000,0.78)">$1,000 <span>Save ~22%</span></div>
+                <div class="ded-opt" onclick="selectDed(this,3000,0.65)">$3,000 <span>Save ~35%</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:2rem">
+            <button class="calc-back-btn" onclick="goStep(1)">&#8592; Back</button>
+            <button class="calc-next-btn" onclick="goStep(3);calcQuote()">Calculate My Quote <span>&#8594;</span></button>
+          </div>
+        </div>
+
+        <!-- STEP 3: RESULT -->
+        <div class="calc-panel" id="calc-step-3">
+          <div class="result-wrap">
+            <div class="result-left">
+              <div class="result-tag">Your Estimated Quote</div>
+              <div class="result-price-wrap">
+                <div class="result-from">from</div>
+                <div class="result-price" id="result-monthly">$0</div>
+                <div class="result-period">/month</div>
+              </div>
+              <div class="result-annual">or <span id="result-annual">$0</span> for the full period</div>
+              <div class="result-note">&#128274; This is an estimate across 20+ insurers. Actual rate confirmed by Priya — often lower.</div>
+              <div class="result-actions">
+                <a href="tel:6479323000" class="btn-plum" style="display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.13 19.79 19.79 0 0 1 1.62 4.5 2 2 0 0 1 3.62 2.5h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.72-.72a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  Lock in this rate
+                </a>
+                <button class="calc-back-btn" onclick="goStep(1);resetCalc()" style="font-size:.78rem">Recalculate</button>
+              </div>
+            </div>
+            <div class="result-right">
+              <div class="result-summary-title">Your summary</div>
+              <div class="result-rows" id="result-rows"></div>
+              <div class="result-breakdown">
+                <div class="rb-title">Price breakdown</div>
+                <div class="rb-row"><span>Base premium</span><span id="rb-base">$0</span></div>
+                <div class="rb-row"><span>Health adjustment</span><span id="rb-health">$0</span></div>
+                <div class="rb-row"><span>Deductible discount</span><span id="rb-ded" style="color:var(--plum)">-$0</span></div>
+                <div class="rb-row rb-total"><span>Monthly total</span><span id="rb-total">$0</span></div>
+              </div>
+              <div class="result-insurer-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                Rates compared from Sun Life, Manulife, Blue Cross, Destination, TuGo &amp; 15+ more
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 <section id="data" style="background:#fff;padding:7rem 5vw">
   <div class="sec-eyebrow reveal">Data &amp; Insights</div>
   <h2 class="sec-title reveal">Numbers that tell<br><em>the full story</em></h2>
-  <p class="sec-sub reveal" style="margin-bottom:3.5rem">Real data from Priya's client portfolio &mdash; transparency you won't find at a bank.</p>
+  <p class="sec-sub reveal" style="margin-bottom:3.5rem">Real data from Priya's client portfolio — transparency you won't find at a bank.</p>
+
+  <!-- Top row: 4 animated stat counters -->
   <div class="data-counters reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-bottom:4rem">
-    <div class="dc-card"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="dc-num" data-val="500" data-suf="+">0</div><div class="dc-lbl">Families Protected</div><div class="dc-bar"><div class="dc-fill" style="width:83%"></div></div></div>
-    <div class="dc-card"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="dc-num" data-val="32" data-suf="%" data-pre="~">0</div><div class="dc-lbl">Avg. Savings vs Bank</div><div class="dc-bar"><div class="dc-fill" style="width:32%"></div></div></div>
-    <div class="dc-card"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div class="dc-num" data-val="98" data-suf="%">0</div><div class="dc-lbl">Same-Day Quote Rate</div><div class="dc-bar"><div class="dc-fill" style="width:98%"></div></div></div>
-    <div class="dc-card"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="dc-num" data-val="4.9" data-suf="/5">0</div><div class="dc-lbl">Client Satisfaction</div><div class="dc-bar"><div class="dc-fill" style="width:98%"></div></div></div>
+    <div class="dc-card">
+      <div class="dc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="dc-num" data-val="500" data-suf="+">0</div>
+      <div class="dc-lbl">Families Protected</div>
+      <div class="dc-bar"><div class="dc-fill" style="width:83%"></div></div>
+    </div>
+    <div class="dc-card">
+      <div class="dc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <div class="dc-num" data-val="32" data-suf="%" data-pre="~">0</div>
+      <div class="dc-lbl">Avg. Savings vs Bank</div>
+      <div class="dc-bar"><div class="dc-fill" style="width:32%"></div></div>
+    </div>
+    <div class="dc-card">
+      <div class="dc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+      <div class="dc-num" data-val="98" data-suf="%">0</div>
+      <div class="dc-lbl">Same-Day Quote Rate</div>
+      <div class="dc-bar"><div class="dc-fill" style="width:98%"></div></div>
+    </div>
+    <div class="dc-card">
+      <div class="dc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="dc-num" data-val="4.9" data-suf="/5">0</div>
+      <div class="dc-lbl">Client Satisfaction</div>
+      <div class="dc-bar"><div class="dc-fill" style="width:98%"></div></div>
+    </div>
   </div>
+
+  <!-- Charts row -->
   <div class="charts-grid">
-    <div class="chart-card reveal-l"><div class="chart-header"><div class="chart-title">Coverage Mix</div><div class="chart-sub">Distribution of policies placed</div></div><div class="chart-wrap"><canvas id="chart-donut"></canvas></div><div class="donut-legend" id="donut-legend"></div></div>
-    <div class="chart-card reveal"><div class="chart-header"><div class="chart-title">Client Growth</div><div class="chart-sub">Families protected year over year</div></div><div class="chart-wrap"><canvas id="chart-line"></canvas></div></div>
-    <div class="chart-card reveal-r"><div class="chart-header"><div class="chart-title">Savings vs Bank</div><div class="chart-sub">Average premium savings by product (%)</div></div><div class="chart-wrap"><canvas id="chart-bar"></canvas></div></div>
+    <div class="chart-card reveal-l">
+      <div class="chart-header">
+        <div class="chart-title">Coverage Mix</div>
+        <div class="chart-sub">Distribution of policies placed</div>
+      </div>
+      <div class="chart-wrap"><canvas id="chart-donut"></canvas></div>
+      <div class="donut-legend" id="donut-legend"></div>
+    </div>
+    <div class="chart-card reveal">
+      <div class="chart-header">
+        <div class="chart-title">Client Growth</div>
+        <div class="chart-sub">Families protected year over year</div>
+      </div>
+      <div class="chart-wrap"><canvas id="chart-line"></canvas></div>
+    </div>
+    <div class="chart-card reveal-r">
+      <div class="chart-header">
+        <div class="chart-title">Savings vs Bank</div>
+        <div class="chart-sub">Average premium savings by product (%)</div>
+      </div>
+      <div class="chart-wrap"><canvas id="chart-bar"></canvas></div>
+    </div>
   </div>
 </section>
 <section id="stats" style="padding:5rem 5vw">
@@ -503,7 +1109,7 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
     </div>
     <div class="quote-form reveal-r">
       <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" placeholder="First name"/></div><div class="form-group"><label>Last Name</label><input type="text" placeholder="Last name"/></div></div>
-      <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com"/></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="Priyabhatia.insurance@gmail.com"/></div>
       <div class="form-group"><label>Phone</label><input type="tel" placeholder="647-000-0000"/></div>
       <div class="form-group"><label>Coverage Type</label><select><option value="" disabled selected>Select coverage type...</option><option>Life Insurance</option><option>Critical Illness</option><option>Disability Insurance</option><option>Super Visa / Visitor</option><option>Health &amp; Dental</option><option>Mortgage Protection</option><option>Not sure - need advice</option></select></div>
       <div class="form-group"><label>Message (optional)</label><textarea placeholder="Tell us what you are looking for..."></textarea></div>
@@ -517,12 +1123,12 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
   <h2 class="sec-title reveal">Everything you<br><em>need to know</em></h2>
   <div class="faq-grid">
     <div class="faq-list reveal">
-      <div class="faq-item open"><div class="faq-q"><span class="faq-q-text">What does an insurance broker do that I can't do myself?</span><div class="faq-icon">+</div></div><div class="faq-a">A broker compares dozens of insurers simultaneously, negotiates on your behalf, and ensures the policy actually fits your situation &mdash; not just the cheapest option that could leave gaps.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">Do I pay extra to use a broker?</span><div class="faq-icon">+</div></div><div class="faq-a">No. Brokers are paid by insurance companies through commissions. You get expert advice and broader market access at no extra cost to you.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">How quickly can I get a Super Visa insurance quote?</span><div class="faq-icon">+</div></div><div class="faq-a">Often the same day. Priya can usually have options ready within hours. Coverage certificates are issued quickly for visa applications.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">I'm a newcomer to Canada. Where do I start?</span><div class="faq-icon">+</div></div><div class="faq-a">Start with a free consultation. Priya specializes in helping newcomers understand Canadian insurance in English or Hindi.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">What's the difference between bank mortgage insurance and independent?</span><div class="faq-icon">+</div></div><div class="faq-a">Bank creditor insurance declines in value as your mortgage shrinks. Independent coverage is portable, personally owned, and often provides better value.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">Which areas of Ontario do you serve?</span><div class="faq-icon">+</div></div><div class="faq-a">All of Ontario &mdash; with a strong focus on Brampton, Mississauga, Toronto, Vaughan, and Oakville. Virtual consultations available province-wide.</div></div>
+      <div class="faq-item open"><div class="faq-q"><span class="faq-q-text">What does an insurance broker do that I can't do myself?</span><div class="faq-icon">+</div></div><div class="faq-a">A broker compares dozens of insurers simultaneously, negotiates on your behalf, and ensures the policy fits your situation. Priya explains every option in plain language &mdash; in English or Hindi &mdash; so you decide with confidence.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">Do I pay extra to use a broker?</span><div class="faq-icon">+</div></div><div class="faq-a">No. Brokers are paid by insurance companies through commissions. You get expert, unbiased advice and access to 20+ insurers at absolutely no extra cost to you. Priya&rsquo;s consultations are always free.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">How quickly can I get a Super Visa insurance quote?</span><div class="faq-icon">+</div></div><div class="faq-a">Often the same day &mdash; sometimes within hours. Coverage certificates are issued quickly for IRCC visa applications. Priya regularly assists families across Brampton and Mississauga where Super Visa demand is highest.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">I'm a newcomer to Canada. Where do I start?</span><div class="faq-icon">+</div></div><div class="faq-a">Start with a free consultation. Priya came to Canada as an immigrant herself 20 years ago &mdash; she understands exactly what you&rsquo;re going through. She explains everything in English or Hindi, covering health, life, Super Visa, and investment options.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">What's the difference between bank mortgage insurance and independent?</span><div class="faq-icon">+</div></div><div class="faq-a">Bank creditor insurance is tied to your mortgage, declines in value as the balance drops, and ends when you switch lenders. Independent coverage is personally owned, portable, stays the same value, and is typically 30&ndash;40% cheaper.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="faq-q-text">Which areas of Ontario do you serve?</span><div class="faq-icon">+</div></div><div class="faq-a">All of Ontario and Alberta. Priya has a strong focus on the GTA &mdash; Brampton, Mississauga, Toronto, Vaughan, Oakville &mdash; and offers virtual consultations for anyone across Canada.</div></div>
     </div>
     <div>
       <div class="faq-aside reveal-r">
@@ -539,11 +1145,35 @@ footer{background:var(--dark);padding:5rem 5vw 2.5rem}
 <footer>
   <div class="footer-grid">
     <div><a href="#" class="footer-logo">Priya <span>Bhatia</span></a><p class="footer-desc">Licensed independent insurance broker serving newcomers, families and individuals across Ontario with honest bilingual advice.</p></div>
+    <div class="footer-col footer-social-col">
+      <div class="footer-col-title">Follow Priya</div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/PriyaBhatiaInsurance/" target="_blank" class="fsoc-btn" title="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook
+        </a>
+        <a href="https://www.instagram.com/priyabhatia.insurance/" target="_blank" class="fsoc-btn" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram
+        </a>
+        <a href="https://www.linkedin.com/in/priya-bhatia-a99b541b6/" target="_blank" class="fsoc-btn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+        </a>
+        <a href="https://www.tiktok.com/@priyabhatia.insurance" target="_blank" class="fsoc-btn" title="TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.37 6.37 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>TikTok
+        </a>
+        <a href="mailto:Priyabhatia.insurance@gmail.com" class="fsoc-btn" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email
+        </a>
+        <a href="https://wa.me/16479323000" target="_blank" class="fsoc-btn" title="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp
+        </a>
+      </div>
+    </div>
     <div class="footer-col"><div class="footer-col-title">Coverage</div><ul><li><a href="#services">Life Insurance</a></li><li><a href="#services">Critical Illness</a></li><li><a href="#services">Disability</a></li><li><a href="#services">Super Visa</a></li><li><a href="#services">Health &amp; Dental</a></li><li><a href="#services">Mortgage Protection</a></li></ul></div>
-    <div class="footer-col"><div class="footer-col-title">Contact</div><ul><li><span>647-932-3000</span></li><li><span>Greater Toronto Area</span></li><li><span>Ontario-Wide Virtual</span></li><li><span>Hindi &amp; English</span></li><li><span>Mon&ndash;Sat 9am&ndash;7pm</span></li></ul></div>
-    <div class="footer-col"><div class="footer-col-title">Stay Connected</div><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:1rem;line-height:1.6">Insurance tips for newcomers and families.</p><div class="footer-nl"><input type="email" placeholder="Your email address"/><button>Subscribe</button></div></div>
+    <div class="footer-col"><div class="footer-col-title">Contact</div><ul><li><span>647-932-3000</span></li><li><span>Ontario &amp; Alberta</span></li><li><span>Ontario-Wide Virtual</span></li><li><span>Hindi &amp; English</span></li><li><a href="mailto:Priyabhatia.insurance@gmail.com" style="color:rgba(255,255,255,.5);text-decoration:none;font-size:.83rem;display:block;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.5)'">Priyabhatia.insurance@gmail.com</a>
+<li><span>Mon&ndash;Fri 9am&ndash;6pm &bull; Weekends by appt</span></li></li></ul></div>
+    <div class="footer-col"><div class="footer-col-title">Stay Connected</div><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:1rem;line-height:1.6">Insurance tips for newcomers and families.</p><div class="footer-nl"><input type="email" placeholder="Priyabhatia.insurance@gmail.com"/><button>Subscribe</button></div></div>
   </div>
-  <div class="footer-bottom"><div class="footer-copy">&#169; 2025 Priya Bhatia Insurance. All rights reserved.</div><div class="footer-lic">Licensed Insurance Broker &middot; Province of Ontario</div></div>
+  <div class="footer-bottom"><div class="footer-copy">&#169; 2026 PB Insurance Agency. All rights reserved.</div><div class="footer-lic">Licensed Insurance Broker &middot; Province of Ontario</div></div>
 </footer>
 <button id="chat-btn" onclick="toggleChat()">
   <span class="chat-ping"></span>
@@ -621,10 +1251,14 @@ var QA=[
   {k:['disability','unable to work','income replacement'],a:'Disability Insurance replaces income if you cannot work.\n\n- Short-term disability\n- Long-term disability\n\nYour income is your most valuable asset.\n\nFree consultation: 647-932-3000'},
   {k:['health','dental','vision','prescription','ohip'],a:'Health and Dental plans fill the gaps OHIP does not cover.\n\nIncludes drugs, dental, vision and paramedical services.\n\nGreat for self-employed people.\n\nContact Priya: 647-932-3000'},
   {k:['mortgage','home','house','creditor'],a:'Mortgage Protection keeps your family in their home.\n\nWhy choose Priya over your bank:\n- Personally owned not tied to the bank\n- Stays fixed as your mortgage shrinks\n- Portable when you switch lenders\n\nFree comparison: 647-932-3000'},
+  {k:['travel','trip','abroad'],a:'Travel Insurance protects from emergencies abroad. Provincial plans have very limited out-of-country coverage.\n\nCall: 647-932-3000'},
   {k:['cost','price','how much','premium','rate'],a:'Rough starting points:\n\n- Life Insurance: from $20-30/month\n- Critical Illness: from $30-60/month\n- Super Visa: from $100-200/month\n- Health and Dental: from $80-150/month\n\nPriya shops 20+ insurers for free.\n\nCall 647-932-3000 for an accurate quote!'},
   {k:['newcomer','new to canada','immigrant','landed'],a:'Priya specializes in helping newcomers!\n\nConsider:\n- Health and Dental (OHIP has a 3-month wait)\n- Life Insurance\n- Super Visa for visiting parents\n\nPriya speaks English and Hindi.\n\nFree consultation: 647-932-3000'},
   {k:['hindi','language','bilingual'],a:'Yes! Priya offers consultations in English and Hindi.\n\nClear honest advice in the language you prefer.\n\nCall Priya: 647-932-3000'},
-  {k:['quote','free quote','get a quote','get started'],a:'Getting a free quote is quick and easy!\n\n1. Fill the quote form on this page\n2. Call or text: 647-932-3000\n3. Tap the WhatsApp chip below\n\nNo obligation. Same day response!'}
+  {k:['broker','independent','bank','agent'],a:'As an independent broker Priya works for YOU, not any insurance company.\n\n- Compares 20+ insurers\n- No bias toward any single company\n- No extra cost to you\n\nFree consultation: 647-932-3000'},
+  {k:['quote','free quote','get a quote','get started'],a:'Getting a free quote is quick and easy!\n\n1. Fill the quote form on this page\n2. Call or text: 647-932-3000\n3. Tap the WhatsApp chip below\n\nNo obligation. Same day response!'},
+  {k:['speak','call','contact','priya','phone','whatsapp','talk'],a:'Reach Priya directly!\n\nCall or text: 647-932-3000\nWhatsApp: tap the button below\n\nServing all of Ontario. Mon-Sat 9am-7pm'},
+  {k:['ontario','toronto','brampton','mississauga','gta','area'],a:'Priya serves all of Ontario!\n\nMain areas: Brampton, Mississauga, Toronto, Vaughan, Oakville and all surrounding GTA.\n\nVirtual consultations province-wide.\n\nBook your free call: 647-932-3000'}
 ];
 function findAns(t){
   var l=t.toLowerCase();
@@ -680,6 +1314,9 @@ function sendText(text){
     addBot(ans||'Great question! For the most accurate answer speak directly with Priya.\n\nCall or text: 647-932-3000\nTap WhatsApp below\n\nFree consultations, same-day response!');
   },850);
 }
+// Expose all onclick functions to global scope
+
+// ── PARTICLE CANVAS ──
 (function(){
   var c=document.getElementById('particle-canvas');
   if(!c)return;
@@ -687,7 +1324,13 @@ function sendText(text){
   function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
   resize();window.addEventListener('resize',resize);
   for(var i=0;i<55;i++){
-    pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*3+1,dx:(Math.random()-.5)*.4,dy:(Math.random()-.5)*.4,a:Math.random()*.5+.2});
+    pts.push({
+      x:Math.random()*W,y:Math.random()*H,
+      r:Math.random()*3+1,
+      dx:(Math.random()-.5)*.4,
+      dy:(Math.random()-.5)*.4,
+      a:Math.random()*.5+.2
+    });
   }
   function draw(){
     ctx.clearRect(0,0,W,H);
@@ -695,63 +1338,322 @@ function sendText(text){
       p.x+=p.dx;p.y+=p.dy;
       if(p.x<0||p.x>W)p.dx*=-1;
       if(p.y<0||p.y>H)p.dy*=-1;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(139,28,92,'+p.a+')';ctx.fill();
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(139,28,92,'+p.a+')';
+      ctx.fill();
     });
     requestAnimationFrame(draw);
   }
   draw();
 })();
+
+// ── MOUSE PARALLAX on hero ──
 (function(){
   var hero=document.getElementById('hero-right');
   if(!hero)return;
   var items=hero.querySelectorAll('[data-depth]');
   document.addEventListener('mousemove',function(e){
     var rect=hero.getBoundingClientRect();
-    var cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
+    var cx=rect.left+rect.width/2;
+    var cy=rect.top+rect.height/2;
     var dx=e.clientX-cx,dy=e.clientY-cy;
     items.forEach(function(el){
       var d=parseFloat(el.dataset.depth)||0.3;
-      el.style.transform='translate('+(dx*d*0.04)+'px,'+(dy*d*0.04)+'px)';
+      var mx=dx*d*0.04,my=dy*d*0.04;
+      el.style.transform='translate('+mx+'px,'+my+'px)';
     });
   });
-  hero.addEventListener('mouseleave',function(){items.forEach(function(el){el.style.transform='';});});
+  hero.addEventListener('mouseleave',function(){
+    items.forEach(function(el){el.style.transform='';});
+  });
 })();
+
+
+// ── CHARTS ──
 (function(){
   var script=document.createElement('script');
   script.src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js';
   script.onload=function(){initCharts();};
   document.head.appendChild(script);
+
+  // Animated counter cards
   var dco=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(!e.isIntersecting)return;
-      var card=e.target,numEl=card.querySelector('.dc-num'),fill=card.querySelector('.dc-fill');
-      var target=parseFloat(numEl.dataset.val),suf=numEl.dataset.suf||'',pre=numEl.dataset.pre||'';
-      var isFloat=target%1!==0,start=0,dur=1600,step=16,inc=target/(dur/step);
-      var iv=setInterval(function(){start=Math.min(start+inc,target);numEl.textContent=pre+(isFloat?start.toFixed(1):Math.floor(start))+suf;if(start>=target)clearInterval(iv);},step);
+      var card=e.target;
+      var numEl=card.querySelector('.dc-num');
+      var fill=card.querySelector('.dc-fill');
+      var target=parseFloat(numEl.dataset.val);
+      var suf=numEl.dataset.suf||'';
+      var pre=numEl.dataset.pre||'';
+      var isFloat=target%1!==0;
+      var start=0,dur=1600,step=16;
+      var inc=target/(dur/step);
+      var iv=setInterval(function(){
+        start=Math.min(start+inc,target);
+        numEl.textContent=pre+(isFloat?start.toFixed(1):Math.floor(start))+suf;
+        if(start>=target)clearInterval(iv);
+      },step);
+      if(fill)setTimeout(function(){fill.style.width=fill.parentElement.previousElementSibling&&fill.style.width},100);
       dco.unobserve(card);
     });
   },{threshold:.4});
   document.querySelectorAll('.dc-card').forEach(function(c){dco.observe(c);});
+
+  // Animate bar fills
+  var bfo=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting)return;
+      e.target.querySelectorAll('.dc-fill').forEach(function(f){
+        var w=f.style.width;f.style.width='0%';
+        setTimeout(function(){f.style.width=w;},200);
+      });
+      bfo.unobserve(e.target);
+    });
+  },{threshold:.3});
+  document.querySelectorAll('.data-counters').forEach(function(c){bfo.observe(c);});
+
   function initCharts(){
-    var plum='rgba(139,28,92,1)',plum2='rgba(165,42,112,.8)',plum3='rgba(196,88,139,.7)';
-    Chart.defaults.font.family='"Plus Jakarta Sans",sans-serif';Chart.defaults.color='#8A6070';
+    var plum='rgba(139,28,92,1)';
+    var plum2='rgba(165,42,112,.8)';
+    var plum3='rgba(196,88,139,.7)';
+    var plum4='rgba(232,160,176,.6)';
+    var plum5='rgba(252,232,241,.8)';
+    var plumLight='rgba(139,28,92,.12)';
+
+    Chart.defaults.font.family='"Plus Jakarta Sans",sans-serif';
+    Chart.defaults.color='#8A6070';
+
+    // Donut chart
     var dc=document.getElementById('chart-donut');
     if(dc){
       var labels=['Life Insurance','Super Visa','Critical Illness','Health & Dental','Mortgage','Disability'];
       var data=[32,24,18,12,9,5];
       var colors=[plum,plum2,plum3,'rgba(196,88,139,.55)','rgba(232,160,176,.8)','rgba(252,232,241,1)'];
-      new Chart(dc,{type:'doughnut',data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:2,borderColor:'#fff',hoverOffset:8}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',animation:{animateRotate:true,duration:1200},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+'%';}}}}}})
+      new Chart(dc,{
+        type:'doughnut',
+        data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:2,borderColor:'#fff',hoverOffset:8}]},
+        options:{responsive:true,maintainAspectRatio:false,cutout:'68%',animation:{animateRotate:true,duration:1200},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' '+c.label+': '+c.raw+'%';}}}}}
+      });
       var leg=document.getElementById('donut-legend');
       if(leg){labels.forEach(function(l,i){var d=document.createElement('div');d.className='dl-item';d.innerHTML='<div class="dl-dot" style="background:'+colors[i]+'"></div>'+l+' '+data[i]+'%';leg.appendChild(d);});}
     }
+
+    // Line chart
     var lc=document.getElementById('chart-line');
-    if(lc){new Chart(lc,{type:'line',data:{labels:['2018','2019','2020','2021','2022','2023','2024'],datasets:[{label:'Families',data:[85,142,198,268,345,432,500],borderColor:plum,backgroundColor:'rgba(139,28,92,.07)',borderWidth:2.5,fill:true,tension:.45,pointBackgroundColor:plum,pointRadius:4,pointHoverRadius:7}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:1400},plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(139,28,92,.06)'}},y:{grid:{color:'rgba(139,28,92,.06)'},ticks:{callback:function(v){return v+'+';}},beginAtZero:true}}}});}
+    if(lc){
+      new Chart(lc,{
+        type:'line',
+        data:{
+          labels:['2018','2019','2020','2021','2022','2023','2024'],
+          datasets:[{
+            label:'Families',
+            data:[85,142,198,268,345,432,500],
+            borderColor:plum,
+            backgroundColor:'rgba(139,28,92,.07)',
+            borderWidth:2.5,
+            fill:true,
+            tension:.45,
+            pointBackgroundColor:plum,
+            pointRadius:4,
+            pointHoverRadius:7
+          }]
+        },
+        options:{responsive:true,maintainAspectRatio:false,animation:{duration:1400},plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(139,28,92,.06)'},ticks:{font:{size:11}}},y:{grid:{color:'rgba(139,28,92,.06)'},ticks:{font:{size:11},callback:function(v){return v+'+';}},beginAtZero:true}}}
+      });
+    }
+
+    // Bar chart
     var bc=document.getElementById('chart-bar');
-    if(bc){new Chart(bc,{type:'bar',data:{labels:['Life','Mortgage','Critical Illness','Disability','Health'],datasets:[{label:'Savings %',data:[28,38,22,35,30],backgroundColor:[plum,plum2,plum3,'rgba(196,88,139,.65)','rgba(232,160,176,.8)'],borderRadius:6,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:1200},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' ~'+c.raw+'% cheaper than bank';}}}},limits:{y:{min:0,max:50}},scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(139,28,92,.06)'},ticks:{callback:function(v){return v+'%';}},max:50,beginAtZero:true}}}});}
+    if(bc){
+      new Chart(bc,{
+        type:'bar',
+        data:{
+          labels:['Life','Mortgage','Critical Illness','Disability','Health'],
+          datasets:[{
+            label:'Savings %',
+            data:[28,38,22,35,30],
+            backgroundColor:[plum,plum2,plum3,'rgba(196,88,139,.65)','rgba(232,160,176,.8)'],
+            borderRadius:6,
+            borderSkipped:false
+          }]
+        },
+        options:{responsive:true,maintainAspectRatio:false,animation:{duration:1200,delay:function(ctx){return ctx.dataIndex*100;}},plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return ' ~'+c.raw+'% cheaper than bank';}}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:'rgba(139,28,92,.06)'},ticks:{font:{size:10},callback:function(v){return v+'%';}},max:50,beginAtZero:true}}}
+      });
+    }
+
+    // Trigger charts on scroll
+    var co2=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){Chart.instances.forEach(function(ch){ch.reset();ch.update();});co2.disconnect();}});
+    },{threshold:.2});
+    var dataSection=document.getElementById('data');
+    if(dataSection)co2.observe(dataSection);
   }
 })();
-window.toggleChat=toggleChat;window.slide=slide;window.submitForm=submitForm;window.sendChip=sendChip;window.sendMsg=sendMsg;
+
+
+// ── SUPER VISA CALCULATOR ──
+var calcState = {
+  age: 60, health: 'excellent', count: 1,
+  coverage: 150000, duration: 12, dedMulti: 1.0, ded: 0
+};
+
+function updateAge(v) {
+  calcState.age = parseInt(v);
+  document.getElementById('age-val').textContent = v;
+  var pct = (v - 40) / (85 - 40) * 100;
+  document.getElementById('visitor-age').style.background =
+    'linear-gradient(90deg,var(--plum) '+pct+'%,rgba(139,28,92,.2) '+pct+'%)';
+}
+
+function selectRadio(el, name, val) {
+  document.querySelectorAll('.radio-opt').forEach(function(r){r.classList.remove('selected');});
+  el.classList.add('selected');
+  calcState.health = val;
+}
+
+var visCount = 1;
+function changeCount(d) {
+  visCount = Math.max(1, Math.min(4, visCount + d));
+  calcState.count = visCount;
+  document.getElementById('visitor-count').textContent = visCount;
+}
+
+function selectCov(el, val) {
+  document.querySelectorAll('.cov-opt').forEach(function(c){c.classList.remove('selected');});
+  el.classList.add('selected');
+  calcState.coverage = val;
+}
+
+function selectDur(el, val) {
+  document.querySelectorAll('.dur-opt').forEach(function(d){d.classList.remove('selected');});
+  el.classList.add('selected');
+  calcState.duration = val;
+}
+
+function selectDed(el, ded, multi) {
+  document.querySelectorAll('.ded-opt').forEach(function(d){d.classList.remove('selected');});
+  el.classList.add('selected');
+  calcState.ded = ded;
+  calcState.dedMulti = multi;
+}
+
+function goStep(n) {
+  document.querySelectorAll('.calc-panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('calc-step-'+n).classList.add('active');
+  document.querySelectorAll('.calc-step').forEach(function(s,i){
+    s.classList.remove('active','done');
+    if(i+1 < n) s.classList.add('done');
+    if(i+1 === n) s.classList.add('active');
+  });
+}
+
+function resetCalc() {
+  calcState = {age:60,health:'excellent',count:1,coverage:150000,duration:12,dedMulti:1.0,ded:0};
+  document.getElementById('visitor-age').value = 60;
+  updateAge(60);
+  visCount = 1;
+  document.getElementById('visitor-count').textContent = '1';
+}
+
+function calcQuote() {
+  // Base rate per month per $10k of coverage
+  var baseRate = 0.0085;
+
+  // Age factor
+  var age = calcState.age;
+  var ageFactor = 1.0;
+  if(age < 50) ageFactor = 0.72;
+  else if(age < 55) ageFactor = 0.88;
+  else if(age < 60) ageFactor = 1.0;
+  else if(age < 65) ageFactor = 1.28;
+  else if(age < 70) ageFactor = 1.65;
+  else if(age < 75) ageFactor = 2.15;
+  else if(age < 80) ageFactor = 2.85;
+  else ageFactor = 3.6;
+
+  // Health factor
+  var healthFactor = {excellent:1.0, stable:1.35, complex:1.72}[calcState.health] || 1.0;
+
+  // Coverage factor
+  var covFactor = calcState.coverage / 10000;
+
+  // Duration discount
+  var durDiscount = {3:1.0, 6:0.96, 12:0.92, 24:0.87}[calcState.duration] || 1.0;
+
+  var baseMonthly = baseRate * covFactor * ageFactor * healthFactor * durDiscount;
+  var healthAdj = baseMonthly * (healthFactor - 1);
+  var withHealth = baseRate * covFactor * ageFactor * durDiscount;
+  var dedSaving = baseMonthly * (1 - calcState.dedMulti);
+  var finalMonthly = baseMonthly * calcState.dedMulti * calcState.count;
+  var finalTotal = finalMonthly * calcState.duration;
+
+  // Update result display
+  document.getElementById('result-monthly').textContent = '$' + Math.round(finalMonthly);
+  document.getElementById('result-annual').textContent = '$' + Math.round(finalTotal).toLocaleString();
+
+  // Breakdown
+  document.getElementById('rb-base').textContent = '$' + Math.round(withHealth * calcState.count);
+  document.getElementById('rb-health').textContent = '+$' + Math.round(healthAdj * calcState.count);
+  document.getElementById('rb-ded').textContent = '-$' + Math.round(dedSaving * calcState.count);
+  document.getElementById('rb-total').textContent = '$' + Math.round(finalMonthly);
+
+  // Summary rows
+  var healthLabel = {excellent:'Excellent',stable:'Stable / Managed',complex:'Complex'}[calcState.health];
+  var rows = document.getElementById('result-rows');
+  rows.innerHTML = [
+    ['Age', age + ' years old'],
+    ['Health', healthLabel],
+    ['Visitors', calcState.count + (calcState.count > 1 ? ' people' : ' person')],
+    ['Coverage', '$' + (calcState.coverage/1000).toFixed(0) + ',000'],
+    ['Duration', calcState.duration + ' months'],
+    ['Deductible', calcState.ded === 0 ? 'None' : '$' + calcState.ded.toLocaleString()]
+  ].map(function(r){
+    return '<div class="result-row"><span class="result-row-label">'+r[0]+'</span><span class="result-row-val">'+r[1]+'</span></div>';
+  }).join('');
+}
+
+window.updateAge=updateAge;
+window.selectRadio=selectRadio;
+window.changeCount=changeCount;
+window.selectCov=selectCov;
+window.selectDur=selectDur;
+window.selectDed=selectDed;
+window.goStep=goStep;
+window.resetCalc=resetCalc;
+window.calcQuote=calcQuote;
+
+
+// Animate review bars on scroll
+var rbo = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.wr-bar-fill').forEach(function(b){
+        var w = b.style.width; b.style.width='0%';
+        setTimeout(function(){b.style.width=w;},200);
+      });
+      rbo.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+var wrHeader = document.querySelector('.wr-header');
+if(wrHeader) rbo.observe(wrHeader);
+
+function showMoreReviews(){
+  document.querySelectorAll('.wr-hidden').forEach(function(c){
+    c.classList.remove('wr-hidden');
+    c.style.animation='msgIn .4s ease both';
+  });
+  document.getElementById('wr-more-btn').style.display='none';
+}
+window.showMoreReviews=showMoreReviews;
+
+window.toggleChat=toggleChat;
+window.slide=slide;
+window.submitForm=submitForm;
+window.sendChip=sendChip;
+window.sendMsg=sendMsg;
 </script>
 </body>
 </html>
